@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { toogleLike } from "../../redux/wishlistSlice";
 import { FaHeart } from "react-icons/fa6";
 import { incrementItem } from "../../redux/seeMoreSlice";
+import { toast } from "react-toastify";
 
 const Products = ({ loading, data, btn, title }) => {
   let dispatch = useDispatch();
@@ -18,9 +19,20 @@ const Products = ({ loading, data, btn, title }) => {
     <div key={item.id} className="card">
       <img src={item?.image} alt={item?.title} />
       <div className="links">
-        <button onClick={() => dispatch(addToCart(item))}>
+        <button
+          onClick={() => {
+            dispatch(addToCart(item));
+
+            if (products?.findIndex((el) => el.id == item.id) < 0) {
+              return toast.success("Added to Cart ");
+            }
+          }}
+        >
           {products?.some((el) => el.id === item.id) ? (
-            <BsCart3 style={{ color: "#46A358" }} />
+            <>
+              {}
+              <BsCart3 style={{ color: "#46A358" }} />
+            </>
           ) : (
             <BsCart3 />
           )}
