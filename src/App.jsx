@@ -8,6 +8,8 @@ import Navbar from "./components/navbar/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Wishlist from "./router/wishlist/Wishlist";
+import NotFound from "./router/not-found/NotFound";
+import AnimatedCursor from "react-animated-cursor";
 
 const App = () => {
   return (
@@ -18,8 +20,14 @@ const App = () => {
         <Route path="product-cart" element={<ProductCart />} />
         <Route path="product-checkout" element={<ProductCheckout />} />
         <Route path="wishes" element={<Wishlist />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
+      <AnimatedCursor
+        showSystemCursor={true}
+        color="70, 163, 88"
+        outerScale={4}
+      />
     </>
   );
 };

@@ -7,7 +7,7 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart(state, action) {
-      let index = state.value.findIndex((el) => el.id === action.payload.id);
+      let index = seachIndex(state, action);
       index < 0
         ? (state.value = [...state.value, { ...action.payload, soni: 1 }])
         : state.value;
@@ -33,6 +33,12 @@ export const cartSlice = createSlice({
     },
   },
 });
+function setLocalStorage(state) {
+  localStorage.setItem("cart", JSON.stringify(state));
+}
+function seachIndex(state, action) {
+  return state.value.findIndex((el) => el.id === action.payload.id);
+}
 export const {
   addToCart,
   decrementCartQuantity,
@@ -40,10 +46,3 @@ export const {
   removeItemFromCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;
-
-function setLocalStorage(state) {
-  localStorage.setItem("cart", JSON.stringify(state));
-}
-function seachIndex(state, action) {
-  return state.value.findIndex((el) => el.id === action.payload.id);
-}
